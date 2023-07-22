@@ -7,7 +7,7 @@ export default function ProductCard(props) {
         <div className="productCardCont">
             <div className="productCard">
                 <div>
-                    <Image src={"/"+product.id+".jpg"} alt="" loading="lazy" width={250} height={250} className="productCardImg"/>
+                    <Image src={"/"+product.id+".jpg"} alt="" loading="lazy" width={270} height={270} className="productCardImg"/>
                     <p className="bold productTitle">{product.title}</p>
                     <p className="bold productPrice">{product.price} р.</p>
                 </div> 

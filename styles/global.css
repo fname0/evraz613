@@ -36,7 +36,7 @@
     --heroWrapperHeight: 460px;
     --linkFS: 25px;
     --catalogContMaxWidth: 1170px;
-    --productCardWidthDef: 33.3%;
+    --productCardWidthDef: 290px;
     --catalogContDisplay: flex;
     --catsFlexDir: column;
     --catsMT: 25px;
@@ -59,13 +59,13 @@
 @media (max-width: 1170px) {
 :root {
     --catalogContMaxWidth: 880px;
-    --productCardWidthDef: 50%;
+    --productCardWidthDef: 290px;
 }
 }
 
 @media (max-width: 880px) {
     :root {
-        --productCardWidthDef: 100%;
+        --productCardWidthDef: 50%;
         --catalogContDisplay: block;
         --catsFlexDir: row;
         --catsMT: 10px;
@@ -240,6 +240,11 @@
 .addToBasketBtn:hover {
     background-color: rgb(229,229,229);
     cursor: pointer;
+}
+
+.productCardImg {
+    width: calc(100% - 20px);
+    height: auto;
 }
 
 .productCardImg:hover {
