@@ -99,11 +99,11 @@ export default function Index() {
                     <li className='med link'>·</li>
                     <li className='med link pointer'>Каталог</li>
                     <li className='med link'>·</li>
-                    <Link href="/contacts" className='med link pointer'>Контакты</Link>
+                    <Link href="/about#contacts" className='med link pointer'>Контакты</Link>
                 </ul>
             </div>
 
-            <div className="bold heroTitle">К А Т А Л О Г</div>
+            <div className="bold heroTitle">КАТАЛОГ</div>
         </div>
 
         <div className="catalogCont">
