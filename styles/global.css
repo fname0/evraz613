@@ -486,3 +486,143 @@
 .pointer:hover {
     cursor: pointer;
 }
+
+.carouselImg {
+    width: auto;
+    height: 90vw;
+    max-height: 580px;
+}
+
+.carouselImgCont {
+    width: 95vw;
+    max-width: 585px;
+    height: 95vw;
+    max-height: 585px;
+    text-align: center;
+}
+
+.carousel {
+    display: flex;
+    position: absolute;
+    /* transform: translateX(-275px); */
+}
+
+.carouselWrapper {
+    width: 95vw;
+    max-width: 585px;
+    height: 95vw;
+    max-height: 585px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.productCont {
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    min-height: 85svh;
+    flex-wrap: wrap;
+}
+
+.productTextCont {
+    width: 95vw;
+    max-width: 585px;
+    padding-left: 2.5vw;
+    align-self: center;
+}
+
+.productInfoTitle {
+    height: 15svh;
+    font-size: var(--infoTitleFS);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+} 
+
+.addToBasketInfoBtn {
+    margin-top: 35px;
+    padding: 17px 45px;
+    font-size: 24px;
+    border: none;
+    color: rgb(71, 137, 235);
+    margin-bottom: 35px;
+}
+
+.addToBasketInfoBtn:hover {
+    background-color: rgb(229,229,229);
+    cursor: pointer;
+}
+
+.changeProductCountContInfo {
+    display: flex;
+    gap: 15px;
+    margin-top: 35px;
+    margin-bottom: 35px;
+}
+
+.productCountInfo {
+    font-size: 24px;
+    line-height: 52px;
+}
+
+.changeProductCountInfo {
+    text-align: center;
+    width: 54px;
+    height: 54px;
+    border-radius: 27px;
+    outline: none;
+    border: none;
+    background-color: rgb(240,240,240);
+    color: rgb(71, 137, 235);
+    font-size: 24px;
+}
+
+.changeProductCountInfo:hover {
+    background-color: rgb(229,229,229);
+    cursor: pointer;
+}
+
+.mb {
+    margin-bottom: 35px;
+}
+
+.productInfoPrice {
+    font-size: 48px;
+}
+
+.gray {
+    color: gray;
+}
+
+.carouselSwipeBtnCont {
+    position: absolute;
+    height: 90vw;
+    max-height: 580px;
+    font-size: 48px;
+    color: rgb(71, 137, 235);
+    display: flex;
+    align-items: center;
+}
+
+.carouselSwipeBtn {
+    background-color: rgb(225, 225, 225, 0.6);
+    height: 58px;
+    width: 58px;
+    border-radius: 29px;
+    line-height: 58px;
+    text-align: center;
+}
+
+
+.carouselSwipeBtn:hover {
+    cursor: pointer;
+}
+
+.next { 
+    right: 20px;
+}
+
+.prev {
+    left: 20px;
+}

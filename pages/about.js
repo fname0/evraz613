@@ -48,10 +48,10 @@ export default function About() {
         <div className="bold infoTitle blue">Товары</div>
         <div className="med infoText">У нас Вы найдёте <span className='blue'>лучшие кроссовки</span> популярных брендов</div>
         <div className="brends">
-          <BrendCard product={{"id": "10", "title": "Nike SB Dunk", "price": "1850"}} brend="nike"/>
-          <BrendCard product={{"id": "1", "title": "Adidas Ozweego OG", "price": "2800"}} brend="adidas"/>
-          <BrendCard product={{"id": "5", "title": "New Balance 302", "price": "2150"}} brend="nb"/>
-          <BrendCard product={{"id": "7", "title": "Reebok Zig Kinetica", "price": "950"}} brend="reebok"/>
+          <BrendCard product={{"id": "40", "title": "Nike SB Dunk", "price": "1850"}} brend="nike"/>
+          <BrendCard product={{"id": "48", "title": "Adidas Ozweego OG", "price": "2800"}} brend="adidas"/>
+          <BrendCard product={{"id": "42", "title": "New Balance 302", "price": "2150"}} brend="nb"/>
+          <BrendCard product={{"id": "51", "title": "Reebok Zig Kinetica", "price": "950"}} brend="reebok"/>
         </div>
         <button className="openCatalogBtn bold blue"><Link href="/" className='resetLinkStyle'>Перейти в каталог</Link></button>
 

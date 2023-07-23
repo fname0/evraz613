@@ -7,7 +7,7 @@ export default function ProductCard(props) {
         <div className="productCardCont">
             <div className="productCard">
                 <div>
-                    <Image src={"/products/"+product.id+"/1"+".jpg"} alt="" loading="lazy" width={270} height={270} className="productCardImg"/>
+                    <Image onClick={() => window.location.href = "/product/"+product.id} src={"/products/"+product.id+"/1.jpg"} alt="" loading="lazy" width={270} height={270} className="productCardImg"/>
                     <p className="bold productTitle">{product.title}</p>
                     <p className="bold productPrice">{product.price} р.</p>
                 </div> 

@@ -55,7 +55,7 @@ export default function Index() {
   "47": {"id":"47","title":"Nike Air Max Plus Utility","sizes":"41/42/42/43/43/44/44/45","price":"2650","photos":"5","cat":"Nike"},
   "48": {"id":"48","title":"Adidas Ozweego OG","sizes":"41/42/42/43/43/44/44/45","price":"2800","photos":"6","cat":"Adidas"},
   "49": {"id":"49","title":"Court Graffik SQ DC","sizes":"41/42/42/43/43/44/44/45","price":"2650","photos":"6","cat":"other"},
-  "50": {"id":"50","title":"Salomon XA Pro 3D Rainy Day","sizes":"37/38/38/39/39/40/40/41","price":"1000","photos":"13","cat":"other"},
+  "50": {"id":"50","title":"Salomon XA Pro 3D Rainy Day","sizes":"37/38/38/39/39/40/40/41","price":"1000","photos":"7","cat":"other"},
   "51": {"id":"51","title":"Reebok Zig Kinetica","sizes":"41/42/42/43/43/44/44/45","price":"950","photos":"1","cat":"other"}}
 
   let searchValueTemp = "";
@@ -85,33 +85,33 @@ export default function Index() {
 
   const addToBasket = (id) => {
     let basketTemp = basket;
-    basketTemp[id] = 1;
+    basketTemp[id] = 8;
     cookie.set('basket', basketTemp);
     setBasket(basketTemp);
     setBasketLength(Object.values(basketTemp).reduce((a, b) => a + b, 0));
-    cookie.set('priceSum', priceSum+parseInt(products[id].price));
-    setPriceSum(priceSum+parseInt(products[id].price));
+    cookie.set('priceSum', priceSum+(parseInt(products[id].price)*8));
+    setPriceSum(priceSum+(parseInt(products[id].price)*8));
   }
 
   const decreaseProductCount = (id) => {
     let basketTemp = basket;
-    if (basket[id] === 1) {delete basketTemp[id]}
-    else {basketTemp[id]-=1}
+    if (basket[id] === 8) {delete basketTemp[id]}
+    else {basketTemp[id]-=8}
     setBasket(basketTemp);
     setBasketLength(Object.values(basketTemp).reduce((a, b) => a + b, 0));
     cookie.set('basket', basketTemp);
-    cookie.set('priceSum', priceSum-parseInt(products[id].price));
-    setPriceSum(priceSum-parseInt(products[id].price));
+    cookie.set('priceSum', priceSum-(parseInt(products[id].price)*8));
+    setPriceSum(priceSum-(parseInt(products[id].price)*8));
   }
 
   const increaseProductCount = (id) => {
     let basketTemp = basket;
-    basketTemp[id]+=1;
+    basketTemp[id]+=8;
     setBasket(basketTemp);
     setBasketLength(Object.values(basketTemp).reduce((a, b) => a + b, 0));
     cookie.set('basket', basketTemp);
-    cookie.set('priceSum', priceSum+parseInt(products[id].price));
-    setPriceSum(priceSum+parseInt(products[id].price));
+    cookie.set('priceSum', priceSum+(parseInt(products[id].price)*8));
+    setPriceSum(priceSum+(parseInt(products[id].price)*8));
   }
 
   return (
