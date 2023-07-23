@@ -10,6 +10,7 @@ export default function ({product}) {
     const [basketLength, setBasketLength] = useState(0);
     const [priceSum, setPriceSum] = useState(0);
     const [basket, setBasket] = useState({});
+    const [step, setStep] = useState(585);
 
     const addToBasket = () => {
         let basketTemp = basket;
@@ -48,22 +49,23 @@ export default function ({product}) {
         setBasket(cookie.get('basket') === undefined ? {} : cookie.get('basket'));
         setBasketLength(cookie.get('basket') === undefined ? 0 : Object.values(cookie.get('basket')).reduce((a, b) => a + b, 0));
         setPriceSum(cookie.get('priceSum') === undefined ? 0 : parseInt(cookie.get('priceSum')));
+        setStep(Math.floor(window.innerWidth * 0.95 >= step ? step : window.innerWidth * 0.95));
     }, [])
 
     const next = () => {
         const carousel = document.getElementById("carousel").style;
         const y = carousel.transform === "" ? 0 : parseInt(carousel.transform.split('(')[1].split('px')[0]);
 
-        if (y === -585*(product.photos-1)) {carousel.transform="translateX(0px)";carousel.transition=" transform 0.2s";}
-        else {carousel.transform="translateX("+(y-585)+"px)";carousel.transition=" transform 0.2s"}
+        if (y === -step*(product.photos-1)) {carousel.transform="translateX(0px)";carousel.transition=" transform 0.2s";}
+        else {carousel.transform="translateX("+(y-step)+"px)";carousel.transition=" transform 0.2s"}
     }
     
     const prev = () => {
         const carousel = document.getElementById("carousel").style;
         const y = carousel.transform === "" ? 0 : parseInt(carousel.transform.split('(')[1].split('px')[0]);
 
-        if (y === 0) {carousel.transform="translateX("+(-585*(product.photos-1))+"px)";carousel.transition=" transform 0.2s";}
-        else {carousel.transform="translateX("+(y+585)+"px)";carousel.transition=" transform 0.2s"}
+        if (y === 0) {carousel.transform="translateX("+(-step*(product.photos-1))+"px)";carousel.transition=" transform 0.2s";}
+        else {carousel.transform="translateX("+(y+step)+"px)";carousel.transition=" transform 0.2s"}
     }
 
     return (
