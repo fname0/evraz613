@@ -45,8 +45,6 @@ export default function ({product}) {
 
     useEffect(() => {
         const cookie = new Cookies();
-        cookie.remove('basket', {path: '/product'})
-        cookie.remove('priceSum', {path: '/product'})
         setCookie(cookie);
         setBasket(cookie.get('basket') === undefined ? {} : cookie.get('basket'));
         setBasketLength(cookie.get('basket') === undefined ? 0 : Object.values(cookie.get('basket')).reduce((a, b) => a + b, 0));
