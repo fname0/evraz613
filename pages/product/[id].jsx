@@ -15,10 +15,10 @@ export default function ({product}) {
     const addToBasket = () => {
         let basketTemp = basket;
         basketTemp[product.id] = 8;
-        cookie.set('basket', basketTemp);
+        cookie.set('basket', basketTemp, {path: "/"});
         setBasket(basketTemp);
         setBasketLength(Object.values(basketTemp).reduce((a, b) => a + b, 0));
-        cookie.set('priceSum', priceSum+(parseInt(product.price)*8));
+        cookie.set('priceSum', priceSum+(parseInt(product.price)*8), {path: "/"});
         setPriceSum(priceSum+(parseInt(product.price)*8));
       }
     
@@ -28,8 +28,8 @@ export default function ({product}) {
         else {basketTemp[product.id]-=8}
         setBasket(basketTemp);
         setBasketLength(Object.values(basketTemp).reduce((a, b) => a + b, 0));
-        cookie.set('basket', basketTemp);
-        cookie.set('priceSum', priceSum-(parseInt(product.price)*8));
+        cookie.set('basket', basketTemp, {path: "/"});
+        cookie.set('priceSum', priceSum-(parseInt(product.price)*8), {path: "/"});
         setPriceSum(priceSum-(parseInt(product.price)*8));
       }
     
@@ -38,13 +38,15 @@ export default function ({product}) {
         basketTemp[product.id]+=8;
         setBasket(basketTemp);
         setBasketLength(Object.values(basketTemp).reduce((a, b) => a + b, 0));
-        cookie.set('basket', basketTemp);
-        cookie.set('priceSum', priceSum+(parseInt(product.price)*8));
+        cookie.set('basket', basketTemp, {path: "/"});
+        cookie.set('priceSum', priceSum+(parseInt(product.price)*8), {path: "/"});
         setPriceSum(priceSum+(parseInt(product.price)*8));
       }
 
     useEffect(() => {
         const cookie = new Cookies();
+        cookie.remove('basket', {path: '/product'})
+        cookie.remove('priceSum', {path: '/product'})
         setCookie(cookie);
         setBasket(cookie.get('basket') === undefined ? {} : cookie.get('basket'));
         setBasketLength(cookie.get('basket') === undefined ? 0 : Object.values(cookie.get('basket')).reduce((a, b) => a + b, 0));
