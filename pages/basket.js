@@ -4,8 +4,9 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import ProductCard from '../components/ProductCard';
 import Cookies from 'universal-cookie';
+import BasketCard from '../components/BasketCard';
 
-export default function Index() {
+export default function Basket() {
   const products = {"1": {"id":"1","title":"Columbia Pursuit","sizes":"41/42/43/43/44/44/45/46","price":"1600","photos":"7","cat":"other"},
   "2": {"id":"2","title":"New Balance 9060","sizes":"41/42/42/43/43/44/44/45","price":"1550","photos":"9","cat":"New Balance"},
   "3": {"id":"3","title":"Adidas Ozweego","sizes":"41/42/43/43/44/44/45/46","price":"1350","photos":"6","cat":"Adidas"},
@@ -61,7 +62,7 @@ export default function Index() {
   let searchValueTemp = "";
   const [searchValue, setSearchValue] = useState("");
   const [cookie, setCookie] = useState();
-  const [basket, setBasket] = useState({});
+  const [basket, setBasket] = useState(undefined);
   const [basketLength, setBasketLength] = useState(0);
   const [priceSum, setPriceSum] = useState(0);
   const [catsContFixed, setCatsContFixed] = useState(false);
@@ -73,26 +74,7 @@ export default function Index() {
     setBasket(cookie.get('basket') === undefined ? {} : cookie.get('basket'));
     setBasketLength(cookie.get('basket') === undefined ? 0 : Object.values(cookie.get('basket')).reduce((a, b) => a + b, 0));
     setPriceSum(cookie.get('priceSum') === undefined ? 0 : parseInt(cookie.get('priceSum')));
-    window.innerWidth > 880 ? window.addEventListener('scroll', handleScroll) : null;
-    return () => window.removeEventListener('scroll', handleScroll);
   }, [])
-
-  const handleScroll = () => {
-    if (document.getElementById("catsCont") === null) return;
-    if (document.getElementById("catsCont").getBoundingClientRect().top > 0) {setCatsContFixed(false)}
-    else if (document.getElementById("catsCont").getBoundingClientRect().top <= 0) {setCatsContFixed(true)}
-  }
-
-
-  const addToBasket = (id) => {
-    let basketTemp = basket;
-    basketTemp[id] = 8;
-    cookie.set('basket', basketTemp);
-    setBasket(basketTemp);
-    setBasketLength(Object.values(basketTemp).reduce((a, b) => a + b, 0));
-    cookie.set('priceSum', priceSum+(parseInt(products[id].price)*8));
-    setPriceSum(priceSum+(parseInt(products[id].price)*8));
-  }
 
   const decreaseProductCount = (id) => {
     let basketTemp = basket;
@@ -119,114 +101,27 @@ export default function Index() {
     <div className="App" id="app">
         <Seo title="TRY OPT | Кроссовки оптом" description="TRY OPT - оптовый магазин кроссовок Premium, Lux и Medium качества по самым приятным ценам" keywords="TRY OPT, кроссовки"/>
 
-        {basketLength === 0 ? null : <div className="basketBtnCont" onClick={() => {window.location.href="/basket"}}>
-            <svg role="img" className="basketBtn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><path fill="none" strokeWidth="2" strokeMiterlimit="10" d="M44 18h10v45H10V18h10z"></path><path fill="none" strokeWidth="2" strokeMiterlimit="10" d="M22 24V11c0-5.523 4.477-10 10-10s10 4.477 10 10v13"></path></svg>
-            </div> }
-            {basketLength === 0 ? null : <div className="med basketCount">{basketLength}</div> }
-
-        <div className="heroWrapper" id="main">
-            <Image
-            priority
-            src='/bg.jpg'
-            placeholder='blur'
-            blurDataURL='data:image/jpeg;base64,iBG[yG9G01%201t7M|~o_300M|~pWTIUt7t7xuWBIp-:oIRlxujEWBM}oeoL%MIo9Gj?kCR+j]tRIUxt%MozWBafbIWAae'
-            layout="fill"
-            objectFit="cover"
-            objectPosition="center"
-            alt="hero image"
-            style={{zIndex: -1}}
-            />
-
-            <div className="navbar">
-                <ul className="links">
-                    <Link href="/about" className='med link pointer'>О нас</Link>
-                    <li className='med link'>·</li>
-                    <li className='med link pointer'>Каталог</li>
-                    <li className='med link'>·</li>
-                    <Link href="/about#contacts" className='med link pointer'>Контакты</Link>
-                </ul>
-            </div>
-
-            <div className="bold heroTitle">КАТАЛОГ</div>
+        <div className="homeBtnCont" onClick={() => {window.location.href="/"}}>
+            <img src="/home.svg" alt="home" className="basketBtn" />
         </div>
 
-        <div className="catalogCont">
-          <div className="catalogCatsCont"  id="catsCont">
-            <div className={catsContFixed ? "catsCont" : null}>
-              <div className="searchInputCont">
-                    <input type="text" className="reg searchInput" placeholder='Поиск...'  onKeyDown={(e) => {searchValueTemp=e.target.value;e.key==="Enter"?setSearchValue(searchValueTemp):null}}/>
-                    <Image
-                    src='/search.svg'
-                    width={30}
-                    height={30}
-                    className='searchBtn'
-                    alt="search image"
-                    onClick={() => setSearchValue(searchValueTemp)}/>
-                </div>
-                <div className="cats">
-                  <div className="med cat" onClick={() => {document.getElementById("adidas").scrollIntoView({behavior: "smooth"})}}>Adidas</div>
-                  <div className="med cat" onClick={() => {document.getElementById("nike").scrollIntoView({behavior: "smooth"})}}>Nike</div>
-                  <div className="med cat" onClick={() => {document.getElementById("nb").scrollIntoView({behavior: "smooth"})}}>New Balance</div>
-                  <div className="med cat" onClick={() => {document.getElementById("other").scrollIntoView({behavior: "smooth"})}}>Другое</div>
-                </div>
-            </div>
-          </div>
+        <div className="productInfoTitle bold blue">Корзина</div>
 
-          <div className="productsConts">
-              <div className="bold productsContTitle" id='adidas'>Adidas</div>
-              <div className="productsCont">
-                {Object.entries(products).filter(name => name[1].cat === "Adidas").filter(name => searchValue.toLowerCase().split(' ').every(v => (name[1].title+" "+name[1].desc).toLowerCase().includes(v))).map((product) => (
-                  <ProductCard
-                      key={product[1].id}
-                      product={product[1]}
-                      addToBasket={addToBasket}
-                      count={basket[product[1].id]}
-                      decrease={decreaseProductCount}
-                      increase={increaseProductCount}
-                  />
-                  ))}
-              </div>
-              <div className="bold productsContTitle" id='nike'>Nike</div>
-              <div className="productsCont">
-                {Object.entries(products).filter(name => name[1].cat === "Nike").filter(name => searchValue.toLowerCase().split(' ').every(v => (name[1].title+" "+name[1].desc).toLowerCase().includes(v))).map((product) => (
-                  <ProductCard
-                      key={product[1].id}
-                      product={product[1]}
-                      addToBasket={addToBasket}
-                      count={basket[product[1].id]}
-                      decrease={decreaseProductCount}
-                      increase={increaseProductCount}
-                  />
-                  ))}
-              </div>
-              <div className="bold productsContTitle" id='nb'>New Balance</div>
-              <div className="productsCont">
-                {Object.entries(products).filter(name => name[1].cat === "New Balance").filter(name => searchValue.toLowerCase().split(' ').every(v => (name[1].title+" "+name[1].desc).toLowerCase().includes(v))).map((product) => (
-                  <ProductCard
-                      key={product[1].id}
-                      product={product[1]}
-                      addToBasket={addToBasket}
-                      count={basket[product[1].id]}
-                      decrease={decreaseProductCount}
-                      increase={increaseProductCount}
-                  />
-                  ))}
-              </div>
-              <div className="bold productsContTitle" id='other'>Другое</div>
-              <div className="productsCont">
-                {Object.entries(products).filter(name => name[1].cat === "other").filter(name => searchValue.toLowerCase().split(' ').every(v => (name[1].title+" "+name[1].desc).toLowerCase().includes(v))).map((product) => (
-                  <ProductCard
-                      key={product[1].id}
-                      product={product[1]}
-                      addToBasket={addToBasket}
-                      count={basket[product[1].id]}
-                      decrease={decreaseProductCount}
-                      increase={increaseProductCount}
-                  />
-                  ))}
-              </div>
-          </div>
-        </div>
+        {basket === undefined ? null :
+        basketLength === 0 ? <div className="basketMainCont bold basketError">Корзина пуста</div> :
+        <div className="basketMainCont">
+            {Object.entries(products).filter(name => basket[name[1].id] !== undefined).map((product) => (
+                <BasketCard
+                    key={product[1].id}
+                    product={product[1]}
+                    count={basket[product[1].id]}
+                    decrease={decreaseProductCount}
+                    increase={increaseProductCount}
+                />
+                ))}
+        </div>}
+
+        {basketLength === 0 ? null : <div className="productInfoText bold">Для заказа отправьте скриншот корзины в Telegram менеджеру - <span className='blue' onClick={() => window.open("https://t.me/DanilTryOpt")}>@DanilTryOpt</span></div>}
     </div>
   )
 }

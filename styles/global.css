@@ -44,6 +44,10 @@
     --catsML: 25px;
     --infoTitleFS: 56px;
     --bestsWidth: 880px;
+    --basketBtnContSizes: 80px;
+    --basketBtnMarginTop: 18px;
+    --basketBtnContBorderRadius: 40px;
+    --basketCountTop: 75px;
 }
 
 @media (max-width: 480px) {
@@ -74,6 +78,10 @@
         --catsML: 0px;
         --infoTitleFS: 36px;
         --bestsWidth: 80vw;
+        --basketBtnContSizes: 60px;
+        --basketBtnMarginTop: 10px;
+        --basketBtnContBorderRadius: 30px;
+        --basketCountTop: 60px;
     }
 }
 
@@ -625,4 +633,128 @@
 
 .prev {
     left: 20px;
+}
+
+.basketBtnCont {
+    width: var(--basketBtnContSizes);
+    height: var(--basketBtnContSizes);
+    z-index: 1;
+    position: fixed;
+    background-color: rgba(240,240,240,0.6);
+    transition: background-color 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    top: calc(7.5svh - (var(--basketBtnContSizes) / 2));
+    right: 10px;
+    border-radius: var(--basketBtnContBorderRadius);
+    text-align: center;
+}
+
+.basketBtnCont:hover {
+    cursor: pointer;
+    background-color: rgb(229,229,229);
+    transition: background-color 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.basketBtn {
+    stroke:black;
+    width: 40px;
+    height: 40px;
+    margin-top: var(--basketBtnMarginTop);
+}
+
+.basketCount {
+    position: fixed;
+    top: var(--basketCountTop);
+    right: 10px;
+    background-color: black;
+    z-index: 2;
+    height: 25px;
+    width: 25px;
+    border-radius: 12.5px;
+    color: white;
+    text-align: center;
+    line-height: 25px;
+    font-size: 14px;
+}
+
+.homeBtnCont {
+    width: var(--basketBtnContSizes);
+    height: var(--basketBtnContSizes);
+    z-index: 1;
+    position: fixed;
+    background-color: rgba(240,240,240,0.6);
+    transition: background-color 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    top: calc(7.5svh - (var(--basketBtnContSizes) / 2));
+    left: 10px;
+    border-radius: var(--basketBtnContBorderRadius);
+    text-align: center;
+}
+
+.homeBtnCont:hover {
+    cursor: pointer;
+    background-color: rgb(229,229,229);
+    transition: background-color 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.basketMainCont {
+    min-height: 75svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.basketError {
+    font-size: var(--infoTitleFS);
+}
+
+.basketCardCont {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 7.5px;
+    padding-bottom: 7.5px;
+    margin-top: 7.5px;
+    padding-top: 7.5px;
+    padding-right: 10px;
+    padding-left: 5px;
+    width: 90vw;
+    max-width: 620px;
+    background-color: rgb(240,240,240);
+    border-radius: 15px;
+}
+
+.basketCardCont > p {margin-right: auto;margin-left: auto;}
+.basketCardCont > div {margin-right: auto;margin-left: auto;
+}
+
+.changeBasketCountCont {
+    display: flex;
+    gap: 5px;
+}
+
+.changeBasketCount {
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    background-color: white;
+}
+
+.changeBasketCount:hover {
+    cursor: pointer;
+}
+
+.basketCardImg {
+    border-radius: 15px;
+}
+
+.productInfoText {
+    text-align: center;
+    font-size: 20px;
+    width: 95vw;
+    max-width: 620px;
+    margin-right: auto;
+    margin-left: auto;
 }

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function ProductCard(props) {
     const product=props.product;
@@ -7,7 +8,7 @@ export default function ProductCard(props) {
         <div className="productCardCont">
             <div className="productCard">
                 <div>
-                    <Image onClick={() => window.location.href = "/product/"+product.id} src={"/products/"+product.id+"/1.jpg"} alt="" loading="lazy" width={270} height={270} className="productCardImg"/>
+                    <Link href={"/product/"+product.id}><Image src={"/products/"+product.id+"/1.jpg"} alt="" loading="lazy" width={270} height={270} className="productCardImg"/></Link>
                     <p className="bold productTitle">{product.title}</p>
                     <p className="bold productPrice">{product.price} р.</p>
                 </div> 
