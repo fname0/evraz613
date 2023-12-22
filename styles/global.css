@@ -10,7 +10,8 @@
 
 @font-face {
     font-family: 'FG';
-    src: url(../public/FranklinGothic.ttf);
+    src: url('../public/FranklinGothic.ttf');
+    font-display: swap;
 }
 
 .main{
