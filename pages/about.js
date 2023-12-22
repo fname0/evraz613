@@ -35,7 +35,7 @@ export default function About() {
             <div className="bold heroTitle">О НАС</div>
         </div>
 
-        <div className="med infoText"><span className="blue">TRY OPT - </span> оптовый магазин кроссовок Premium, Lux и Medium качества по самым приятным ценам</div>
+        <div className="med infoText"><span className="blue">TRY OPT - </span> оптовый лавочка кроссовок Premium, Lux и Medium качества по самым приятным ценам</div>
         <div className="bold infoTitle blue">Наши преимущества</div>
         <div className="bests">
           <BestCard svg="check" text="Надежный поставщик с уникальным товаром"/>
