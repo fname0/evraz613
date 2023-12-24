@@ -24,6 +24,7 @@ export default function Index({users}) {
   const [godnostApplied, setGodnostApplied] = useState([]);
   const [prostoiApplied, setProstoiApplied] = useState([]);
   const [dneiDoRemontaApplied, setDneiDoRemontaApplied] = useState([]);
+  const [filterSearchValue, setFilterSearchValue] = useState("");
 
   useEffect(() => {
     const cookie = new Cookies();
@@ -112,131 +113,131 @@ export default function Index({users}) {
                     </div>
                     <div className="modalOptionsSubCont">
                       <img src="/search.svg" className="modalSearchIcon" width={18} height={18}/>
-                      <input type="text" className='modalSearchInput' placeholder='Поиск по фильтру...'/>
+                      <input type="text" className='modalSearchInput' placeholder='Поиск по фильтру...' onChange={e => setFilterSearchValue(e.target.value)}/>
                     </div>
                   </div>
                   {choosenOption == "Собственник" ?
                   <div className="modalOptionsList">
-                    <div className="modalOption">
-                      <input type="checkbox" checked={sobstveniksSelected.includes("НТС")} className='modalOptionCheckbox' id='2' onChange={(e) => {e.target.checked ? setSobstvenikSelected(sobstveniksSelected.concat(["НТС"])) : setSobstvenikSelected(sobstveniksSelected.filter(e => e != "НТС"))}}/>
+                    {(filterSearch && "АО НефтеТрансСервис (НТС)".toLowerCase().includes(filterSearchValue.toLowerCase())) || !filterSearch ? <div className="modalOption">
+                      <input type="checkbox" checked={sobstveniksSelected.includes("НТС")} className='modalOptionCheckbox' onChange={(e) => {e.target.checked ? setSobstvenikSelected(sobstveniksSelected.concat(["НТС"])) : setSobstvenikSelected(sobstveniksSelected.filter(e => e != "НТС"))}}/>
                       <div className="modalOptionText">АО НефтеТрансСервис (НТС)</div>
-                    </div>
-                    <div className="modalOption">
+                    </div> : null }
+                    {(filterSearch && "ООО Грузовая компания (ГК)".toLowerCase().includes(filterSearchValue.toLowerCase())) || !filterSearch ? <div className="modalOption">
                       <input type="checkbox" checked={sobstveniksSelected.includes("ГК")} className='modalOptionCheckbox' onChange={(e) => {e.target.checked ? setSobstvenikSelected(sobstveniksSelected.concat(["ГК"])) : setSobstvenikSelected(sobstveniksSelected.filter(e => e != "ГК"))}}/>
                       <div className="modalOptionText">ООО Грузовая компания (ГК)</div>
-                    </div>
-                    <div className="modalOption">
+                    </div> : null }
+                    {(filterSearch && "ООО Атлант (АТЛ)".toLowerCase().includes(filterSearchValue.toLowerCase())) || !filterSearch ? <div className="modalOption">
                       <input type="checkbox" checked={sobstveniksSelected.includes("АТЛ")} className='modalOptionCheckbox' onChange={(e) => {e.target.checked ? setSobstvenikSelected(sobstveniksSelected.concat(["АТЛ"])) : setSobstvenikSelected(sobstveniksSelected.filter(e => e != "АТЛ"))}}/>
                       <div className="modalOptionText">ООО Атлант (АТЛ)</div>
-                    </div>
-                    <div className="modalOption">
+                    </div> : null }
+                    {(filterSearch && "ОАО Первая грузовая компания (ПГК)".toLowerCase().includes(filterSearchValue.toLowerCase())) || !filterSearch ? <div className="modalOption">
                       <input type="checkbox" checked={sobstveniksSelected.includes("ПГК")} className='modalOptionCheckbox' onChange={(e) => {e.target.checked ? setSobstvenikSelected(sobstveniksSelected.concat(["ПГК"])) : setSobstvenikSelected(sobstveniksSelected.filter(e => e != "ПГК"))}}/>
                       <div className="modalOptionText">ОАО Первая грузовая компания (ПГК)</div>
-                    </div>
-                    <div className="modalOption">
+                    </div> : null}
+                    {(filterSearch && "ООО Модум-Транс (МОД)".toLowerCase().includes(filterSearchValue.toLowerCase())) || !filterSearch ? <div className="modalOption">
                       <input type="checkbox" checked={sobstveniksSelected.includes("МОД")} className='modalOptionCheckbox' onChange={(e) => {e.target.checked ? setSobstvenikSelected(sobstveniksSelected.concat(["МОД"])) : setSobstvenikSelected(sobstveniksSelected.filter(e => e != "МОД"))}}/>
                       <div className="modalOptionText">ООО Модум-Транс (МОД)</div>
-                    </div>
-                    <div className="modalOption">
+                    </div> : null }
+                    {(filterSearch && "ОАО РЖД (РЖД)".toLowerCase().includes(filterSearchValue.toLowerCase())) || !filterSearch ? <div className="modalOption">
                       <input type="checkbox" checked={sobstveniksSelected.includes("РЖД")} className='modalOptionCheckbox' onChange={(e) => {e.target.checked ? setSobstvenikSelected(sobstveniksSelected.concat(["РЖД"])) : setSobstvenikSelected(sobstveniksSelected.filter(e => e != "РЖД"))}}/>
                       <div className="modalOptionText">ОАО РЖД (РЖД)</div>
-                    </div>
-                    <div className="modalOption">
+                    </div> : null }
+                    {(filterSearch && "АО Новая перевозочная компания (НПК)".toLowerCase().includes(filterSearchValue.toLowerCase())) || !filterSearch ? <div className="modalOption">
                       <input type="checkbox" checked={sobstveniksSelected.includes("НПК")} className='modalOptionCheckbox' onChange={(e) => {e.target.checked ? setSobstvenikSelected(sobstveniksSelected.concat(["НПК"])) : setSobstvenikSelected(sobstveniksSelected.filter(e => e != "НПК"))}}/>
                       <div className="modalOptionText">АО Новая перевозочная компания (НПК)</div>
-                    </div>
-                    <div className="modalOption">
+                    </div> : null }
+                    {(filterSearch && "АО Федеральная грузовая компания (ФГК)".toLowerCase().includes(filterSearchValue.toLowerCase())) || !filterSearch ? <div className="modalOption">
                       <input type="checkbox" checked={sobstveniksSelected.includes("ФГК")} className='modalOptionCheckbox' onChange={(e) => {e.target.checked ? setSobstvenikSelected(sobstveniksSelected.concat(["ФГК"])) : setSobstvenikSelected(sobstveniksSelected.filter(e => e != "ФГК"))}}/>
                       <div className="modalOptionText">АО Федеральная грузовая компания (ФГК)</div>
-                    </div>
-                    <div className="modalOption">
+                    </div> : null }
+                    {(filterSearch && "ООО Мечел-Транс (МЕЧ)".toLowerCase().includes(filterSearchValue.toLowerCase())) || !filterSearch ? <div className="modalOption">
                       <input type="checkbox" checked={sobstveniksSelected.includes("МЕЧ")} className='modalOptionCheckbox' onChange={(e) => {e.target.checked ? setSobstvenikSelected(sobstveniksSelected.concat(["МЕЧ"])) : setSobstvenikSelected(sobstveniksSelected.filter(e => e != "МЕЧ"))}}/>
                       <div className="modalOptionText">ООО Мечел-Транс (МЕЧ)</div>
-                    </div>
-                    <div className="modalOption">
+                    </div> : null }
+                    {(filterSearch && "Прочее".toLowerCase().includes(filterSearchValue.toLowerCase())) || !filterSearch ? <div className="modalOption">
                       <input type="checkbox" checked={sobstveniksSelected.includes("Прочее")} className='modalOptionCheckbox' onChange={(e) => {e.target.checked ? setSobstvenikSelected(sobstveniksSelected.concat(["Прочее"])) : setSobstvenikSelected(sobstveniksSelected.filter(e => e != "Прочее"))}}/>
                       <div className="modalOptionText">Прочее</div>
-                    </div>
+                    </div> : null }
                   </div> : choosenOption == "Тип вагона" ?
                   <div className="modalOptionsList">
-                  <div className="modalOption">
+                  {(filterSearch && "Инновационный".toLowerCase().includes(filterSearchValue.toLowerCase())) || !filterSearch ? <div className="modalOption">
                     <input type="checkbox" checked={vagonTypeSelected.includes("Инновационный")} className='modalOptionCheckbox' onChange={(e) => {e.target.checked ? setVagonTypeSelected(vagonTypeSelected.concat(["Инновационный"])) : setVagonTypeSelected(vagonTypeSelected.filter(e => e != "Инновационный"))}}/>
                     <div className="modalOptionText">Инновационный</div>
-                  </div>
-                  <div className="modalOption">
+                  </div> : null }
+                  {(filterSearch && "Люковый".toLowerCase().includes(filterSearchValue.toLowerCase())) || !filterSearch ? <div className="modalOption">
                     <input type="checkbox" checked={vagonTypeSelected.includes("Люковый")} className='modalOptionCheckbox' onChange={(e) => {e.target.checked ? setVagonTypeSelected(vagonTypeSelected.concat(["Люковый"])) : setVagonTypeSelected(vagonTypeSelected.filter(e => e != "Люковый"))}}/>
                     <div className="modalOptionText">Люковый</div>
-                  </div>
-                  <div className="modalOption">
+                  </div> : null }
+                  {(filterSearch && "Безлюковый".toLowerCase().includes(filterSearchValue.toLowerCase())) || !filterSearch ? <div className="modalOption">
                     <input type="checkbox" checked={vagonTypeSelected.includes("Безлюковый")} className='modalOptionCheckbox' onChange={(e) => {e.target.checked ? setVagonTypeSelected(vagonTypeSelected.concat(["Безлюковый"])) : setVagonTypeSelected(vagonTypeSelected.filter(e => e != "Безлюковый"))}}/>
                     <div className="modalOptionText">Безлюковый</div>
-                  </div>
+                  </div> : null }
                 </div> : choosenOption == "Годность" ?
                   <div className="modalOptionsList">
-                  <div className="modalOption">
+                  {(filterSearch && "Экспорт".toLowerCase().includes(filterSearchValue.toLowerCase())) || !filterSearch ? <div className="modalOption">
                     <input type="checkbox" checked={godnostSelected.includes("Экспорт")} className='modalOptionCheckbox' onChange={(e) => {e.target.checked ? setGodnostSelected(godnostSelected.concat(["Эксперт"])) : setGodnostSelected(godnostSelected.filter(e => e != "Эксперт"))}}/>
                     <div className="modalOptionText">Экспорт</div>
-                  </div>
-                  <div className="modalOption">
+                  </div> : null}
+                  {(filterSearch && "РФ".toLowerCase().includes(filterSearchValue.toLowerCase())) || !filterSearch ? <div className="modalOption">
                     <input type="checkbox" checked={godnostSelected.includes("РФ")} className='modalOptionCheckbox' onChange={(e) => {e.target.checked ? setGodnostSelected(godnostSelected.concat(["РФ"])) : setGodnostSelected(godnostSelected.filter(e => e != "РФ"))}}/>
                     <div className="modalOptionText">РФ</div>
-                  </div>
-                  <div className="modalOption">
+                  </div> : null}
+                  {(filterSearch && "ЗапСиб".toLowerCase().includes(filterSearchValue.toLowerCase())) || !filterSearch ? <div className="modalOption">
                     <input type="checkbox" checked={godnostSelected.includes("ЗапСиб")} className='modalOptionCheckbox' onChange={(e) => {e.target.checked ? setGodnostSelected(godnostSelected.concat(["ЗапСиб"])) : setGodnostSelected(godnostSelected.filter(e => e != "ЗапСиб"))}}/>
                     <div className="modalOptionText">ЗапСиб</div>
-                  </div>
-                  <div className="modalOption">
+                  </div> : null}
+                  {(filterSearch && "Больной".toLowerCase().includes(filterSearchValue.toLowerCase())) || !filterSearch ? <div className="modalOption">
                     <input type="checkbox" checked={godnostSelected.includes("Больной")} className='modalOptionCheckbox' onChange={(e) => {e.target.checked ? setGodnostSelected(godnostSelected.concat(["Больной"])) : setGodnostSelected(godnostSelected.filter(e => e != "Больной"))}}/>
                     <div className="modalOptionText">Больной</div>
-                  </div>
-                  <div className="modalOption">
+                  </div> : null }
+                  {(filterSearch && "Кроме КЗ".toLowerCase().includes(filterSearchValue.toLowerCase())) || !filterSearch ? <div className="modalOption">
                     <input type="checkbox" checked={godnostSelected.includes("Кроме КЗ")} className='modalOptionCheckbox' onChange={(e) => {e.target.checked ? setGodnostSelected(godnostSelected.concat(["Кроме КЗ"])) : setGodnostSelected(godnostSelected.filter(e => e != "Кроме КЗ"))}}/>
                     <div className="modalOptionText">Кроме КЗ</div>
-                  </div>
+                  </div> : null }
                 </div> : choosenOption == "Простой" ?
                 <div className="modalOptionsList">
-                <div className="modalOption">
+                {(filterSearch && "1-3 суток".toLowerCase().includes(filterSearchValue.toLowerCase())) || !filterSearch ? <div className="modalOption">
                   <input type="checkbox" checked={prostoiSelected.includes("1-3 суток")} className='modalOptionCheckbox' onChange={(e) => {e.target.checked ? setProstoiSelected(prostoiSelected.concat(["1-3 суток"])) : setProstoiSelected(prostoiSelected.filter(e => e != "1-3 суток"))}}/>
                   <div className="modalOptionText">1-3 суток</div>
-                </div>
-                <div className="modalOption">
+                </div> : null}
+                {(filterSearch && "4-5 суток".toLowerCase().includes(filterSearchValue.toLowerCase())) || !filterSearch ? <div className="modalOption">
                   <input type="checkbox" checked={prostoiSelected.includes("4-5 суток")} className='modalOptionCheckbox' onChange={(e) => {e.target.checked ? setProstoiSelected(prostoiSelected.concat(["4-5 суток"])) : setProstoiSelected(prostoiSelected.filter(e => e != "4-5 суток"))}}/>
                   <div className="modalOptionText">4-5 суток</div>
-                </div>
-                <div className="modalOption">
+                </div> : null}
+                {(filterSearch && "6-10 суток".toLowerCase().includes(filterSearchValue.toLowerCase())) || !filterSearch ? <div className="modalOption">
                   <input type="checkbox" checked={prostoiSelected.includes("6-10 суток")} className='modalOptionCheckbox' onChange={(e) => {e.target.checked ? setProstoiSelected(prostoiSelected.concat(["6-10 суток"])) : setProstoiSelected(prostoiSelected.filter(e => e != "6-10 суток"))}}/>
                   <div className="modalOptionText">6-10 суток</div>
-                </div>
-                <div className="modalOption">
+                </div> : null}
+                {(filterSearch && "Более 10 суток".toLowerCase().includes(filterSearchValue.toLowerCase())) || !filterSearch ? <div className="modalOption">
                   <input type="checkbox" checked={prostoiSelected.includes("Более 10 суток")} className='modalOptionCheckbox' onChange={(e) => {e.target.checked ? setProstoiSelected(prostoiSelected.concat(["Более 10 суток"])) : setProstoiSelected(prostoiSelected.filter(e => e != "Более 10 суток"))}}/>
                   <div className="modalOptionText">Более 10 суток</div>
-                </div>
+                </div> : null}
               </div> : choosenOption == "Дней до ремонта" ?
                 <div className="modalOptionsList">
-                <div className="modalOption">
+                {(filterSearch && "1-200 суток".toLowerCase().includes(filterSearchValue.toLowerCase())) || !filterSearch ? <div className="modalOption">
                   <input type="checkbox" checked={dneiDoRemontaSelected.includes("1-200 суток")} className='modalOptionCheckbox' onChange={(e) => {e.target.checked ? setDneiDoRemontaSelected(dneiDoRemontaSelected.concat(["1-200 суток"])) : setDneiDoRemontaSelected(dneiDoRemontaSelected.filter(e => e != "1-200 суток"))}}/>
                   <div className="modalOptionText">1-200 суток</div>
-                </div>
-                <div className="modalOption">
+                </div> : null}
+                {(filterSearch && "200-400 суток".toLowerCase().includes(filterSearchValue.toLowerCase())) || !filterSearch ? <div className="modalOption">
                   <input type="checkbox" checked={dneiDoRemontaSelected.includes("200-400 суток")} className='modalOptionCheckbox' onChange={(e) => {e.target.checked ? setDneiDoRemontaSelected(dneiDoRemontaSelected.concat(["200-400 суток"])) : setDneiDoRemontaSelected(dneiDoRemontaSelected.filter(e => e != "200-400 суток"))}}/>
                   <div className="modalOptionText">200-400 суток</div>
-                </div>
-                <div className="modalOption">
+                </div> : null}
+                {(filterSearch && "400-600 суток".toLowerCase().includes(filterSearchValue.toLowerCase())) || !filterSearch ? <div className="modalOption">
                   <input type="checkbox" checked={dneiDoRemontaSelected.includes("400-600 суток")} className='modalOptionCheckbox' onChange={(e) => {e.target.checked ? setDneiDoRemontaSelected(dneiDoRemontaSelected.concat(["400-600 суток"])) : setDneiDoRemontaSelected(dneiDoRemontaSelected.filter(e => e != "400-600 суток"))}}/>
                   <div className="modalOptionText">400-600 суток</div>
-                </div>
-                <div className="modalOption">
+                </div> : null}
+                {(filterSearch && "600-800 суток".toLowerCase().includes(filterSearchValue.toLowerCase())) || !filterSearch ? <div className="modalOption">
                   <input type="checkbox" checked={dneiDoRemontaSelected.includes("600-800 суток")} className='modalOptionCheckbox' onChange={(e) => {e.target.checked ? setDneiDoRemontaSelected(dneiDoRemontaSelected.concat(["600-800 суток"])) : setDneiDoRemontaSelected(dneiDoRemontaSelected.filter(e => e != "600-800 суток"))}}/>
                   <div className="modalOptionText">600-800 суток</div>
-                </div>
-                <div className="modalOption">
+                </div> : null}
+                {(filterSearch && "800-1000 суток".toLowerCase().includes(filterSearchValue.toLowerCase())) || !filterSearch ? <div className="modalOption">
                   <input type="checkbox" checked={dneiDoRemontaSelected.includes("800-1000 суток")} className='modalOptionCheckbox' onChange={(e) => {e.target.checked ? setDneiDoRemontaSelected(dneiDoRemontaSelected.concat(["800-1000 суток"])) : setDneiDoRemontaSelected(dneiDoRemontaSelected.filter(e => e != "800-1000 суток"))}}/>
                   <div className="modalOptionText">800-1000 суток</div>
-                </div>
-                <div className="modalOption">
+                </div> : null}
+                {(filterSearch && "Более 1000 суток".toLowerCase().includes(filterSearchValue.toLowerCase())) || !filterSearch ? <div className="modalOption">
                   <input type="checkbox" checked={dneiDoRemontaSelected.includes("Более 1000 суток")} className='modalOptionCheckbox' onChange={(e) => {e.target.checked ? setDneiDoRemontaSelected(dneiDoRemontaSelected.concat(["Более 1000 суток"])) : setDneiDoRemontaSelected(dneiDoRemontaSelected.filter(e => e != "Более 1000 суток"))}}/>
                   <div className="modalOptionText">Более 1000 суток</div>
-                </div>
+                </div> : null}
               </div> : null
                 }
                 </div>
