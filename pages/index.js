@@ -19,6 +19,11 @@ export default function Index({users}) {
   const [filterOpened, setFilterOpened] = useState(false);
   const [RightB, SetRightB] = useState(false);
   const Stations = ['bimbi', 'bmbu', 'bmbubm'];
+  const [sobstveniksApplied, setSobstvenikApplied] = useState([]);
+  const [vagonTypeApplied, setVagonTypeApplied] = useState([]);
+  const [godnostApplied, setGodnostApplied] = useState([]);
+  const [prostoiApplied, setProstoiApplied] = useState([]);
+  const [dneiDoRemontaApplied, setDneiDoRemontaApplied] = useState([]);
 
   useEffect(() => {
     const cookie = new Cookies();
@@ -89,7 +94,7 @@ export default function Index({users}) {
             <div className="modalMainCont">
               <div className="modalHeader">
                 <p className="modalHeaderText">Пользовательский фильтр</p>
-                <div className="sep"/>
+                <div className="sepModal"/>
               </div>
               <div className="modalMain">
                 <div className="modalChooseOption">
@@ -272,10 +277,10 @@ export default function Index({users}) {
                         {name}
                       </div>
                       )) : null}
-                      {prostoiSelected.length != 0 ? <div className="modalChosenOption">
-                        Простой:
+                      {dneiDoRemontaSelected.length != 0 ? <div className="modalChosenOption">
+                        Дней до ремонта:
                       </div> : null}
-                      {prostoiSelected.length != 0 ? prostoiSelected.map((name) => (
+                      {dneiDoRemontaSelected.length != 0 ? dneiDoRemontaSelected.map((name) => (
                         <div className="modalChosenOption gray">
                         {name}
                       </div>
@@ -284,11 +289,20 @@ export default function Index({users}) {
                   </div>
                 </div>
               </div>
+              <div className="sepModal"/>
+              <div className="buttonsModal">
+                <div className="buttonModalText" onClick={() => setFilterOpened(false)}>
+                  Закрыть
+                </div>
+                <div className="buttonModal" onClick={() => {setSobstvenikApplied(sobstveniksSelected);setVagonTypeApplied(vagonTypeSelected);setGodnostApplied(godnostSelected);setProstoiApplied(prostoiSelected);setDneiDoRemontaApplied(dneiDoRemontaSelected);setFilterOpened(false)}}>
+                  Применить
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div> : 
-      <div>
+      </div> : null  : null}
+      {logedIn ? <div>
       {RightB?
         <div className='RightB' onClick={()=>SetRightB(false)}>
           <p onClick={e=>e.stopPropagation()} style={{top: RightB[2], left: RightB[1]}}>
@@ -327,12 +341,13 @@ export default function Index({users}) {
                   <option value='Собственник'>Собственник</option>
               </select>
               <div className="sep-v"></div>
-              <span className='filter'>
+              <span className='filter' onClick={() => {setFilterOpened(true)}}>
                 <img src="/filter.svg" alt="" width={24}/>
-                <div>2</div>
+                <div>{sobstveniksApplied.length + vagonTypeApplied.length + godnostApplied.length + prostoiApplied.length + dneiDoRemontaApplied.length}</div>
               </span>
               <span className='vagon'>
-                <img src="/vagon.svg"  alt="" width={26}/> (3)
+                <img src="/vagon.svg"  alt="" width={26}/>
+                <div>(3)</div>
               </span>
             </div>
               
@@ -438,7 +453,7 @@ export default function Index({users}) {
 }
 
 export async function getServerSideProps() {
-  const response = await fetch(`https://db-lovat.vercel.app/api/getUsers.php`);
+  const response = await fetch(`https://db-lovat.vercel.app/getUsers.php`);
   const users = await response.json();
   return {
       props: {users},
