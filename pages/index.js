@@ -453,7 +453,7 @@ export default function Index({users}) {
 }
 
 export async function getServerSideProps() {
-  const response = await fetch(`https://db-lovat.vercel.app/getUsers.php`);
+  const response = await fetch(`https://db-lovat.vercel.app/api/getUsers.php`);
   const users = await response.json();
   return {
       props: {users},
