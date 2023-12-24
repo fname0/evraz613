@@ -529,13 +529,12 @@ font-family: 'GT';
 
 .panel table td{
 text-align: center;
-border-bottom: 2px solid #b1adc2;
 }
 
 .trains{
-border: 2px solid #D5D5D9;
 display: flex;
 flex-wrap: wrap;
+height: 100%;
 }
 
 .loco{
@@ -665,4 +664,19 @@ font-size: 16px;
 
 .buttonModal:hover {
 cursor: pointer;
+}
+
+.wayTd {
+height: 100%;
+width: 48px;
+}
+
+.sumTd {
+width: 75px;
+height: 100%;
+}
+
+.locoTd {
+width: 45px;
+height: 100%;
 }

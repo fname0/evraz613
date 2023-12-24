@@ -18,13 +18,14 @@ export default function Index({users}) {
   const [filterSearch, setFilterSearch] = useState(false);
   const [filterOpened, setFilterOpened] = useState(false);
   const [RightB, SetRightB] = useState(false);
-  const Stations = ['bimbi', 'bmbu', 'bmbubm'];
+  const Stations = ['Новокузнецк-Северный', 'Томусинская', 'Курегеш'];
   const [sobstveniksApplied, setSobstvenikApplied] = useState([]);
   const [vagonTypeApplied, setVagonTypeApplied] = useState([]);
   const [godnostApplied, setGodnostApplied] = useState([]);
   const [prostoiApplied, setProstoiApplied] = useState([]);
   const [dneiDoRemontaApplied, setDneiDoRemontaApplied] = useState([]);
   const [filterSearchValue, setFilterSearchValue] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     const cookie = new Cookies();
@@ -34,8 +35,10 @@ export default function Index({users}) {
   }, [])
 
   const doSomething = function (e) {
+    const user = Object.entries(users).filter(user => (user[1].station == e.target[0].value) && (user[1].login == e.target[1].value) && (user[1].pass == e.target[2].value))[0];
     if (Object.entries(users).filter(user => (user[1].station == e.target[0].value) && (user[1].login == e.target[1].value) && (user[1].pass == e.target[2].value)).length == 1)
     {
+      setIsAdmin(user[1].role == "adm");
       setLogedIn(true);
       cookie.set('logedIn', true);
     }
@@ -320,12 +323,12 @@ export default function Index({users}) {
           <div className="second-line">
 
             <div className="second-l">
+              {isAdmin ?
               <select>
-                <option value='Новокузнецк Северный'>Новокузнецк Северный</option>
-                <option value='Новокузнецк Северный'>Новокузнецк Северный</option>
-                <option value='Новокузнецк Северный'>Новокузнецк Северный</option>
-                <option value='Новокузнецк Северный'>Новокузнецк Северный</option>
-              </select>
+                <option value='Новокузнецк Северный'>Новокузнецк-Северный</option>
+                <option value='Новокузнецк Северный'>Томусинская</option>
+                <option value='Новокузнецк Северный'>Курегеш</option>
+              </select> : null}
               <div className='stations'>
                 {Stations.map((e)=>
                 <div className='slotOfSecondL'>{e}
@@ -336,10 +339,15 @@ export default function Index({users}) {
 
             <div className="second-r">
               <select>
-                  <option value='Собственник'>Собственник</option>
-                  <option value='Собственник'>Собственник</option>
-                  <option value='Собственник'>Собственник</option>
-                  <option value='Собственник'>Собственник</option>
+                  <option value='Собственник РЖД'>Собственник РЖД</option>
+                  <option value='Собственник МОД'>Собственни МОДк</option>
+                  <option value='Контрагент'>Контрагент</option>
+                  <option value='Собственник МЕЧ'>Собственник МЕЧ</option>
+                  <option value='Собственник ФГК'>Собственник ФГК</option>
+                  <option value='Собственник НПК'>Собственник НПК</option>
+                  <option value='Собственник АТЛ'>Собственник АТЛ</option>
+                  <option value='Собственник ГК'>Собственник ГК</option>
+                  <option value='Собственник НТС'>Собственник НТС</option>
               </select>
               <div className="sep-v"></div>
               <span className='filter' onClick={() => {setFilterOpened(true)}}>
@@ -382,22 +390,21 @@ export default function Index({users}) {
                   <p>НТС(10)</p>
                 </div>
                 <div className='item-fl'>
-                  <div className='quadro' style={{backgroundColor: '#BCF3FF'}}></div>
-                  <p>НТС(10)</p>
+                  <div className='quadro' style={{backgroundColor: '#FFDD29'}}></div>
+                  <p>ФГК(2)</p>
                 </div>
                 <div className='item-fl'>
-                  <div className='quadro' style={{backgroundColor: '#BCF3FF'}}></div>
-                  <p>НТС(10)</p>
+                  <div className='quadro' style={{backgroundColor: '#C8F4C1'}}></div>
+                  <p>ГК(1)</p>
                 </div>
                 <div className='item-fl'>
-                  <div className='quadro' style={{backgroundColor: '#BCF3FF'}}></div>
-                  <p>НТС(10)</p>
+                  <div className='quadro' style={{backgroundColor: '#FFB762'}}></div>
+                  <p>АТЛ(4)</p>
                 </div>
                 <div className='item-fl'>
-                  <div className='quadro' style={{backgroundColor: '#BCF3FF'}}></div>
-                  <p>НТС(10)</p>
+                  <div className='quadro' style={{backgroundColor: '#ABABAB'}}></div>
+                  <p>РЖД(1)</p>
                 </div>
-                
               </div>
 
               <div className='fifth-line'>
@@ -423,25 +430,25 @@ export default function Index({users}) {
 
                 <tbody>
 
-                  {[{Way:1, n: 12, L:[1234,'/trainL.svg']}, 
-                {Way:2, n: 12, L:[1234,'/trainL.svg']},
-                {Way:3, n: 12, L:[1234,'/trainL.svg']},
-                {Way:4, n: 12, L:[1234,'/trainL.svg']},
-                {Way:5, n: 12, L:[1234,'/trainL.svg']},
-                {Way:6, n: 12, L:[1234,'/trainL.svg']}].map(e=>
+                {[{Way:1, n: 12, L:[1234,'/trainL.svg'], trains: ["/trains/default/GruzhonyiNaPodye.svg", "/trains/bolnoy-porognyi/cistern.svg", "/trains/bolnoy-porognyi/hopper.svg", "/trains/bolnoy-porognyi/Krytyi.svg", "/trains/gryaznyi-porognyi/platformUso.svg", "/trains/gryaznyi-porognyi/poluvagon.svg", "/trains/gryaznyi-porognyi/Cistern.svg", "/trains/default/gruzhonyoVhod/cisterna.svg", "/trains/default/gruzhonyoVhod/platformRol.svg", "/trains/default/gruzhonyoVhod/platform.svg"]}, 
+                {Way:2, n: 12, L:[1234,'/trainL.svg'], trains: ["/trains/default/GruzhonyiNaPodye.svg", "/trains/default/GruzhonyiNaPodye.svg", "/trains/default/GruzhonyiNaPodye.svg", "/trains/default/GruzhonyiNaPodye.svg"]},
+                {Way:3, n: 12, L:[1234,'/trainL.svg'], trains: ["/trains/default/gruzhonyoVhod/platformRol.svg"]},
+                {Way:4, n: 12, L:[1234,'/trainL.svg'], trains: ["/trains/default/GruzhonyiNaPodye.svg", "/trains/bolnoy-porognyi/hopper.svg", "/trains/default/GruzhonyiNaPodye.svg"]},
+                {Way:5, n: 12, L:[1234,'/trainL.svg'], trains: ["/trains/default/Prostoy/cistern.svg", "/trains/default/Prostoy/hopper.svg", "/trains/bolnoy-porognyi/hopper.svg", "/trains/default/GruzhonyiNaPodye.svg"]},
+                {Way:6, n: 12, L:[1234,'/trainL.svg'], trains: ["/trains/gryaznyi-porognyi/poluvagon.svg", "/trains/gryaznyi-porognyi/Cistern.svg", "/trains/default/gruzhonyoVhod/cisterna.svg"]}].map(e=>
                 <tr>
-                  <td>{e.Way}</td>
-                  <td>{e.n}</td>
-                  <td className='loco'><div>{e.L[0]}</div><img src={e.L[1]}/></td>
+                  <td className='wayTd'>{e.Way}</td>
+                  <td className='sumTd'>{e.n}</td>
+                  <td className='loco locoTd'><div>{e.L[0]}</div><img src={e.L[1]}/></td>
 
                   <td className='trains'>
-                  {[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0].map(e=>
+                  {e.trains.map(k=>
                   <div>
-                    <img src="/trains/default/GruzhonyiNaPodye.svg" alt="" onContextMenu={(e)=>SetRightB(['данные о вагоне',e.clientX, e.clientY])}/>
+                    <img src={k} alt="" onContextMenu={(e)=>SetRightB(['данные о вагоне',e.clientX, e.clientY])}/>
                   </div>)}
                   </td>
 
-                  <td className='loco'><div>{e.L[0]}</div><img src={e.L[1]} width={33}/></td>
+                  <td className='loco locoTd'><div>{e.L[0]}</div><img src={e.L[1]} width={33}/></td>
                 </tr>)}
 
                 </tbody>
